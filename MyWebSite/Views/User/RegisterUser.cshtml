@@ -10,80 +10,84 @@
 
 
 @Html.AntiForgeryToken()
-<div class="row ">
-    <!--- For Name---->
-    <div class="col-sm-12">
-        <div class="row">
-            <div class="col-xs-4">
-                <label class="firstname">First Name :</label>
-            </div>
-            <div class="col-xs-8">
-                @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control", @placeholder = "Lütfen isminizi Giriniz." })
-                <span class="glyphicon glyphicon-remove alert-danger"> @Html.ValidationMessageFor(x => x.FirstName)</span>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="col-sm-12">
-        <div class="row">
-            <div class="col-xs-4">
-                <label class="lastname">Last Name :</label>
-            </div>
-            <div class="col-xs-8">
-                @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", @placeholder = "Lütfen Soy isminizi Giriniz." })
-                <span class="glyphicon glyphicon-remove alert-danger"> @Html.ValidationMessageFor(x => x.LastName)</span>
-            </div>
-        </div>
-    </div>
-    <!-----For email---->
-    <div class="col-sm-12">
-        <div class="row">
-            <div class="col-xs-4">
-                <label class="mail">Email :</label>
-            </div>
-            <div class="col-xs-8">
-                @Html.TextBoxFor(x => x.EMail, new { @class = "form-control", @placeholder = "Lütfen e-postanızı Giriniz." })
-                <span class="glyphicon glyphicon-remove alert-danger"> @Html.ValidationMessageFor(x => x.EMail)</span>
-            </div>
-        </div>
-    </div>
-    <!-----For Password and confirm password---->
-    <div class="col-sm-12">
-        <div class="row">
-            <div class="col-xs-4">
-                <label class="pass">Password :</label>
-            </div>
-            <div class="col-xs-8">
-                @Html.TextBoxFor(x => x.Password, new { @class = "form-control", @placeholder = "Lütfen password Giriniz.", @type="password"})
-                <span class="glyphicon glyphicon-remove alert-danger"> @Html.ValidationMessageFor(x => x.Password)</span>>
-            </div>
-        </div>
-    </div>
-
-    <!-----------For Phone number-------->
-    <div class="col-sm-12">
-        <div class="row">
-            <div class="col-xs-4 ">
-                <label class="gender">Gender:</label>
-            </div>
-
-            <div class="col-xs-4 male">
-                @Html.RadioButtonFor(x => x.Gender, 1)Male
-                @*<input type="radio" name="gender" id="gender" value="boy">Male</input>*@
-            </div>
-
-            <div class="col-xs-4 female">
-                @Html.RadioButtonFor(x => x.Gender, 0)Female
-                @*<input type="radio" name="gender" id="gender" value="girl">Female</input>*@
-            </div>
-
-        </div>
+    <div class="row ">
         <div class="col-sm-12">
-            <button type="submit" class="btn btn-warning">Submit</button>
-            @*<div class="btn btn-warning">Submit</div>*@
+            <h3>@TempData["Message"]</h3>
+        </div>
+        <!--- For Name---->
+        <div class="col-sm-12">
+           
+            <div class="row">
+                <div class="col-xs-4">
+                    <label class="firstname">First Name :</label>
+                </div>
+                <div class="col-xs-8">
+                    @Html.TextBoxFor(x => x.FirstName, new {@class = "form-control", @placeholder = "Lütfen isminizi Giriniz."})
+                    <span class="glyphicon glyphicon-remove alert-danger"> @Html.ValidationMessageFor(x => x.FirstName)</span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-xs-4">
+                    <label class="lastname">Last Name :</label>
+                </div>
+                <div class="col-xs-8">
+                    @Html.TextBoxFor(x => x.LastName, new {@class = "form-control", @placeholder = "Lütfen Soy isminizi Giriniz."})
+                    <span class="glyphicon glyphicon-remove alert-danger"> @Html.ValidationMessageFor(x => x.LastName)</span>
+                </div>
+            </div>
+        </div>
+        <!-----For email---->
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-xs-4">
+                    <label class="mail">Email :</label>
+                </div>
+                <div class="col-xs-8">
+                    @Html.TextBoxFor(x => x.EMail, new {@class = "form-control", @placeholder = "Lütfen e-postanızı Giriniz."})
+                    <span class="glyphicon glyphicon-remove alert-danger"> @Html.ValidationMessageFor(x => x.EMail)</span>
+                </div>
+            </div>
+        </div>
+        <!-----For Password and confirm password---->
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-xs-4">
+                    <label class="pass">Password :</label>
+                </div>
+                <div class="col-xs-8">
+                    @Html.TextBoxFor(x => x.Password, new {@class = "form-control", @placeholder = "Lütfen password Giriniz.", @type = "password"})
+                    <span class="glyphicon glyphicon-remove alert-danger"> @Html.ValidationMessageFor(x => x.Password)</span>>
+                </div>
+            </div>
+        </div>
+
+        <!-----------For Phone number-------->
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-xs-4 ">
+                    <label class="gender">Gender:</label>
+                </div>
+
+                <div class="col-xs-4 male">
+                    @Html.RadioButtonFor(x => x.Gender, 1)Male
+                    @*<input type="radio" name="gender" id="gender" value="boy">Male</input>*@
+                </div>
+
+                <div class="col-xs-4 female">
+                    @Html.RadioButtonFor(x => x.Gender, 0)Female
+                    @*<input type="radio" name="gender" id="gender" value="girl">Female</input>*@
+                </div>
+
+            </div>
+            <div class="col-sm-12">
+                <button type="submit" class="btn btn-warning">Submit</button>
+                @*<div class="btn btn-warning">Submit</div>*@
+            </div>
         </div>
     </div>
-</div>
 }
 

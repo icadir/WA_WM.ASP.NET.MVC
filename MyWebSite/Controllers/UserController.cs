@@ -35,7 +35,9 @@ namespace MyWebSite.Controllers
                 FirstName = item.FirstName,
                 Gender = item.Gender
             });
-            return View();
+            TempData["Message"] = "Kaydınız oluşturuldu. ";
+            return RedirectToAction("RegisterUser");
         }
+
     }
 }

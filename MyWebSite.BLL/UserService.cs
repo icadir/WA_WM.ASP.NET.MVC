@@ -21,5 +21,17 @@ namespace MyWebSite.BLL
         {
             return _userRepository.AddItem(item);
         }
+
+        public int UpdateUser(User item)
+        {
+            return _userRepository.UpdateITem(item);
+        }
+
+        public int DeleteUSer(User item) 
+        {
+            return _userRepository.DeleteItem(item);
+        }
+
+       
     }
 }
