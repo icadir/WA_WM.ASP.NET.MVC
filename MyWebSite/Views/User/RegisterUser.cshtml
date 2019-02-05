@@ -1,10 +1,15 @@
-﻿
+﻿@model UserVM
 @{
     ViewBag.Title = "RegisterUser";
 }
 
 <h2>RegisterUser</h2>
 
+@using (Html.BeginForm("RegisterUser", "User", FormMethod.Post))
+{
+
+
+@Html.AntiForgeryToken()
 <div class="row ">
     <!--- For Name---->
     <div class="col-sm-12">
@@ -13,7 +18,8 @@
                 <label class="firstname">First Name :</label>
             </div>
             <div class="col-xs-8">
-                <input type="text" name="fname" id="fname" placeholder="Enter your First Name" class="form-control ">
+                @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control", @placeholder = "Lütfen isminizi Giriniz." })
+                <span class="glyphicon glyphicon-remove alert-danger"> @Html.ValidationMessageFor(x => x.FirstName)</span>
             </div>
         </div>
     </div>
@@ -25,7 +31,8 @@
                 <label class="lastname">Last Name :</label>
             </div>
             <div class="col-xs-8">
-                <input type="text" name="lname" id="lname" placeholder="Enter your Last Name" class="form-control last">
+                @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", @placeholder = "Lütfen Soy isminizi Giriniz." })
+                <span class="glyphicon glyphicon-remove alert-danger"> @Html.ValidationMessageFor(x => x.LastName)</span>
             </div>
         </div>
     </div>
@@ -36,7 +43,8 @@
                 <label class="mail">Email :</label>
             </div>
             <div class="col-xs-8">
-                <input type="email" name="email" id="email" placeholder="Enter your email" class="form-control">
+                @Html.TextBoxFor(x => x.EMail, new { @class = "form-control", @placeholder = "Lütfen e-postanızı Giriniz." })
+                <span class="glyphicon glyphicon-remove alert-danger"> @Html.ValidationMessageFor(x => x.EMail)</span>
             </div>
         </div>
     </div>
@@ -47,7 +55,8 @@
                 <label class="pass">Password :</label>
             </div>
             <div class="col-xs-8">
-                <input type="password" name="password" id="password" placeholder="Enter your Password" class="form-control">
+                @Html.TextBoxFor(x => x.Password, new { @class = "form-control", @placeholder = "Lütfen password Giriniz.", @type="password"})
+                <span class="glyphicon glyphicon-remove alert-danger"> @Html.ValidationMessageFor(x => x.Password)</span>>
             </div>
         </div>
     </div>
@@ -60,16 +69,21 @@
             </div>
 
             <div class="col-xs-4 male">
-                <input type="radio" name="gender" id="gender" value="boy">Male</input>
+                @Html.RadioButtonFor(x => x.Gender, 1)Male
+                @*<input type="radio" name="gender" id="gender" value="boy">Male</input>*@
             </div>
 
             <div class="col-xs-4 female">
-                <input type="radio" name="gender" id="gender" value="girl">Female</input>
+                @Html.RadioButtonFor(x => x.Gender, 0)Female
+                @*<input type="radio" name="gender" id="gender" value="girl">Female</input>*@
             </div>
 
         </div>
         <div class="col-sm-12">
-            <div class="btn btn-warning">Submit</div>
+            <button type="submit" class="btn btn-warning">Submit</button>
+            @*<div class="btn btn-warning">Submit</div>*@
         </div>
     </div>
-</div>	 
+</div>
+}
+
