@@ -10,6 +10,7 @@ namespace Admin.BLL.Services.Senders
         MessageStates MessageState { get; }
 
         Task SendAsync(IdentityMessage message, params string[] contacts);
+
         void Send(IdentityMessage message, params string[] contacts);
     }
 }

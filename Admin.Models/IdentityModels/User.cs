@@ -16,5 +16,7 @@ namespace Admin.Models.IdentityModels
         [StringLength(50)]
         [Required]
         public string Surname { get; set; }
+
+        public string ActivationCode { get; set; }
     }
 }
