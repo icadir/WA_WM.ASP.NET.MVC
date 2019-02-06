@@ -10,7 +10,7 @@ using Admin.Models.ViewModels;
 
 namespace Admin.Web.UI.Controllers
 {
-    [Authorize]
+   
     public class CategoryController : BaseController
     {
         // GET: Category
@@ -19,6 +19,7 @@ namespace Admin.Web.UI.Controllers
             return View();
         }
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public ActionResult Add()
         {
             ViewBag.CategoryList = GetCategorySelectList();

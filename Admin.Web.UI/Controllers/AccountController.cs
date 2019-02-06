@@ -141,5 +141,82 @@ namespace Admin.Web.UI.Controllers
             autoManager.SignOut();
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult UserProfile()
+        {
+            try
+            {
+                var id = HttpContext.GetOwinContext().Authentication.User.Identity.GetUserId();
+                var user = NewUserManager().FindById(id);
+                var data = new ProfilePasswordViewModel()
+                {
+                    UserProfileViewModel = new UserProfileViewModel()
+                    {
+                        Email = user.Email,
+                        Id = user.Id,
+                        Name = user.Name,
+                        PhoneNumber = user.PhoneNumber,
+                        Surname = user.Surname,
+                        UserName = user.UserName
+                    }
+                };
+                return View(data);
+            }
+            catch (Exception ex)
+            {
+                TempData["Model"] = new ErrorViewModel()
+                {
+                    Text = $"Bir hata oluştu {ex.Message}",
+                    ActionName = "UserProfile",
+                    ControllerName = "Account",
+                    ErrorCode = 500
+                };
+                return RedirectToAction("Error", "Home");
+            }
+          
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> UpdateProfile(ProfilePasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("UserProfile", model);
+            }
+
+            try
+            {
+                var userManager = NewUserManager();
+                var user =await userManager.FindByIdAsync(model.UserProfileViewModel.Id);
+
+                user.Name = model.UserProfileViewModel.Name;
+                user.Surname = model.UserProfileViewModel.Surname;
+                user.PhoneNumber = model.UserProfileViewModel.PhoneNumber;
+                if (user.Email != model.UserProfileViewModel.Email)
+                {
+                    //todo tekrar aktivasyon maili gönderilmeli. rolude aktif olmamış rol e çevrilmeli.
+                }
+                user.Email = model.UserProfileViewModel.Email;
+                await userManager.UpdateAsync(user);
+
+                TempData["Message"] = "Güncelleme işlemi başarılı";
+                return RedirectToAction("UserProfile");
+
+            }
+            catch (Exception ex)
+            {
+                TempData["Model"] = new ErrorViewModel()
+                {
+                    Text = $"Bir hata oluştu {ex.Message}",
+                    ActionName = "UserProfile",
+                    ControllerName = "Account",
+                    ErrorCode = 500
+                };
+                return RedirectToAction("Error", "Home");
+            }
+        }
     }
 }
