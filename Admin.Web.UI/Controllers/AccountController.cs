@@ -20,6 +20,11 @@ namespace Admin.Web.UI.Controllers
         // GET: Account
         public ActionResult Index()
         {
+            // Http context = http sayfamızın genel içerigi. bunun içerisinde bir web sayfasında ihtiyacımız olan herşeyi buluruz. HttpContext. dedigimiz de herşey burada var.
+            //
+            // Local Storeeach  nedir bir bak bakalım..
+
+            //HttpContext.User.Identity.GetUserId();
             if (HttpContext.GetOwinContext().Authentication.User.Identity.IsAuthenticated)
                 return RedirectToAction("Index", "Home");
 
@@ -123,7 +128,7 @@ namespace Admin.Web.UI.Controllers
                 }
 
                 var authManager = HttpContext.GetOwinContext().Authentication;
-                var userIdentity =
+                var userIdentity =                      //applicationcookie dışında . ya basınca gelen 3-4 tane yapı var farklı farklı hoca bahsetti yinede bak.
                     await userManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
 
                 authManager.SignIn(new AuthenticationProperties()
