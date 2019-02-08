@@ -1,18 +1,17 @@
-﻿using Admin.Models.IdentityModels;
+﻿using Admin.BLL.Helpers;
+using Admin.BLL.Services.Senders;
+using Admin.Models.IdentityModels;
+using Admin.Models.Models;
 using Admin.Models.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using System;
-using System.CodeDom;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
-using Admin.BLL.Helpers;
-using Admin.BLL.Services.Senders;
-using Admin.Models.Models;
 using static Admin.BLL.Identity.MembershipTools;
 
 namespace Admin.Web.UI.Controllers
