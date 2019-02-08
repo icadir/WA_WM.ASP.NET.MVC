@@ -1,4 +1,4 @@
-﻿@model Category
+﻿@model Admin.Models.ViewModels.CategoryViewModel
 @{
     ViewBag.Title = "Category Add";
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
@@ -24,7 +24,7 @@
                     </ul>*@
             </div>
             <div class="card-block">
-                @using (Html.BeginForm("Add", "Category", FormMethod.Post, new { @class = "form-horizontal" }))
+                @using (Html.BeginForm("Add", "Category", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
                 {
                     @Html.AntiForgeryToken()
                     <div class="form-group">
@@ -45,6 +45,12 @@
                         <div class="col-md-7">
                             @Html.TextBoxFor(x => x.TaxRate, new { @class = "form-control", placeholder = "Kdv Oranı", type = "number", step = "1" })
                             <br /><span class="text-red">@Html.ValidationMessageFor(x => x.TaxRate)</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-6">
+                            @Html.LabelFor(x => x.PostedFile)
+                            @Html.TextBoxFor(x => x.PostedFile, new { @class = "form-control", type = "file", multiple = false })
                         </div>
                     </div>
                     <div class="form-group m-b-0">

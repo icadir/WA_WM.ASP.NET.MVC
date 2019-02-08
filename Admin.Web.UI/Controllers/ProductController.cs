@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Data.Entity.Validation;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using Admin.BLL.Helpers;
 using Admin.BLL.Repository;
@@ -32,7 +34,7 @@ namespace Admin.Web.UI.Controllers
         [ValidateAntiForgeryToken]
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public async Task<ActionResult> Add(Product model)
+        public async Task<ActionResult> Add(ProductViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -47,7 +49,47 @@ namespace Admin.Web.UI.Controllers
                     model.SupProductId = null;
 
                 model.LastPriceUpdateDate = DateTime.Now;
-                await new ProductRepo().InsertAsync(model);
+                if (model.PostedFile != null &&
+                    model.PostedFile.ContentLength > 0)
+                {
+                    var file = model.PostedFile;
+                    string fileName = Path.GetFileNameWithoutExtension(file.FileName);
+                    string extName = Path.GetExtension(file.FileName);
+                    fileName = StringHelpers.UrlFormatConverter(fileName);
+                    fileName += StringHelpers.GetCode();
+                    var klasoryolu = Server.MapPath("~/Product/");
+                    var dosyayolu = Server.MapPath("~/Product/") + fileName + extName;
+
+                    if (!Directory.Exists(klasoryolu))
+                        Directory.CreateDirectory(klasoryolu);
+                    file.SaveAs(dosyayolu);
+
+                    WebImage img = new WebImage(dosyayolu);
+                    img.Resize(250, 250, false);
+                    img.AddTextWatermark("Wissen");
+                    img.Save(dosyayolu);
+                    model.ProductPath = "/Product/" + fileName + extName;
+                }
+
+                var model2 = new Product
+                {
+                    ProductPath = model.ProductPath,
+                    Barcode = model.Barcode,
+                    BuyPrice = model.BuyPrice,
+                    CategoryId = model.CategoryId,
+                    CreatedDate = DateTime.Now,
+                    Description = model.Description,
+                    ProductType = model.ProductType,
+                    SalesPrice = model.SalesPrice,
+                    UnitsInStock = model.UnitsInStock,
+                    Quantity = model.Quantity,
+                    ProductName = model.ProductName,
+                    LastPriceUpdateDate = DateTime.Now,
+                    SupProductId = model.SupProductId,
+                   
+
+                };
+                await new ProductRepo().InsertAsync(model2);
                 TempData["Message"] = $"{model.ProductName} isimli ürün başarıyla eklenmiştir";
                 return RedirectToAction("Add");
             }

@@ -1,4 +1,4 @@
-﻿@model Category
+﻿@model Admin.Models.ViewModels.CategoryViewModel
 @{
     ViewBag.Title = "Update";
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
@@ -23,10 +23,10 @@
                     </ul>*@
             </div>
             <div class="card-block">
-                @using (Html.BeginForm("Update", "Category", FormMethod.Post, new { @class = "form-horizontal" }))
+                @using (Html.BeginForm("Update", "Category", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
                 {
                     @Html.AntiForgeryToken()
-                    @Html.HiddenFor(x=>x.Id)
+                    @Html.HiddenFor(x => x.Id)
                     <div class="form-group">
                         @Html.LabelFor(x => x.CategoryName, new { @class = "col-md-3 control-label" })
                         <div class="col-md-7">
@@ -47,6 +47,13 @@
                             <br /><span class="text-red">@Html.ValidationMessageFor(x => x.TaxRate)</span>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <div class="col-xs-6">
+                            @Html.LabelFor(x => x.PostedFile)
+                            @Html.TextBoxFor(x => x.PostedFile, new { @class = "form-control", type = "file", multiple = false })
+                        </div>
+                    </div>
+                    <img class="img-avatar img-avatar-96" src="@Model.CategoryPath" alt="">
                     <div class="form-group m-b-0">
                         <div class="col-md-9 col-md-offset-3">
                             <button class="btn btn-app" type="submit">Kategori Güncelle</button>

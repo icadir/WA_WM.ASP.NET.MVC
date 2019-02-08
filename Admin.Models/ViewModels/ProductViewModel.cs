@@ -1,22 +1,18 @@
-﻿using Admin.Models.Abstracts;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 using Admin.Models.Enums;
 
-namespace Admin.Models.Entities
+namespace Admin.Models.ViewModels
 {
-    [Table("Products")]
-    public class Product : BaseEntity<Guid>
+   public class ProductViewModel
     {
-        public Product()
-        {
-            this.Id = Guid.NewGuid();
-        }
-
         [StringLength(100, MinimumLength = 1, ErrorMessage = "Ürün adı 1 ile 100 karakter aralığında olmalıdır")]
         [Required]
         [DisplayName("Ürün Adı")]
@@ -44,14 +40,7 @@ namespace Admin.Models.Entities
         public int Quantity { get; set; }
         [DisplayName("Açıklama")]
         public string Description { get; set; }
-
         public string ProductPath { get; set; }
-
-        [ForeignKey("CategoryId")]
-        public virtual Category Category { get; set; }
-        [ForeignKey("SupProductId")]
-        public virtual Product SupProduct { get; set; }
-        public virtual ICollection<Product> Products { get; set; } = new HashSet<Product>();
-        public virtual ICollection<Invoice> Invoices { get; set; } = new HashSet<Invoice>();
+        public HttpPostedFileBase PostedFile { get; set; }
     }
 }
