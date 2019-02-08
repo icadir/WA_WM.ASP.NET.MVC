@@ -164,8 +164,8 @@ namespace Admin.Web.UI.Controllers
                     string extName = Path.GetExtension(file.FileName);
                     fileName = StringHelpers.UrlFormatConverter(fileName);
                     fileName += StringHelpers.GetCode();
-                    var klasoryolu = Server.MapPath("~/Category/");
-                    var dosyayolu = Server.MapPath("~/Category/") + fileName + extName;
+                    var klasoryolu = Server.MapPath("~/Product/");
+                    var dosyayolu = Server.MapPath("~/Product/") + fileName + extName;
 
                     if (!Directory.Exists(klasoryolu))
                         Directory.CreateDirectory(klasoryolu);
@@ -175,7 +175,7 @@ namespace Admin.Web.UI.Controllers
                     img.Resize(250, 250, false);
                     img.AddTextWatermark("Wissen");
                     img.Save(dosyayolu);
-                    model.CategoryPath = "/Category/" + fileName + extName;
+                    model.CategoryPath = "/Product/" + fileName + extName;
                 }
 
                 data.CategoryPath = model.CategoryPath;
