@@ -9,7 +9,7 @@ namespace Admin.DAL.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(Admin.DAL.MyContext context)
