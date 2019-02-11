@@ -87,6 +87,7 @@
     <Compile Include="Enums\ProductTypes.cs" />
     <Compile Include="IdentityModels\Role.cs" />
     <Compile Include="IdentityModels\User.cs" />
+    <Compile Include="IdentityRoles.cs" />
     <Compile Include="Models\BarcodeResult.cs" />
     <Compile Include="Models\RecoverPasswordViewModel.cs" />
     <Compile Include="Models\ResponseData.cs" />

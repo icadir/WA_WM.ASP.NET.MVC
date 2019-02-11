@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web.Helpers;
 using System.Web.Mvc;
 using Admin.BLL.Helpers;
+using Admin.Models;
 using Admin.Models.Entities;
 using Admin.Models.ViewModels;
 

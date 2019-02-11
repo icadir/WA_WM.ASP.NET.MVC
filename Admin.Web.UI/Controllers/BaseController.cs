@@ -4,11 +4,13 @@ using Admin.Models.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Admin.BLL.Identity;
 using Admin.Models.Enums;
 
 namespace Admin.Web.UI.Controllers
 {
     [Authorize]
+    [RequireHttps]
     public class BaseController : Controller
     {
         protected List<SelectListItem> GetCategorySelectList()
@@ -77,7 +79,7 @@ namespace Admin.Web.UI.Controllers
         protected List<SelectListItem> GetProductSelectList()
         {
             var products = new ProductRepo()
-                .GetAll(x => x.SupProductId == null && x.ProductType==ProductTypes.Retail)
+                .GetAll(x => x.SupProductId == null && x.ProductType == ProductTypes.Retail)
                 .OrderBy(x => x.ProductName);
             var list = new List<SelectListItem>()
             {
@@ -89,7 +91,7 @@ namespace Admin.Web.UI.Controllers
             };
             foreach (var product in products)
             {
-                if (product.Products.Any(x=> x.ProductType == ProductTypes.Retail))
+                if (product.Products.Any(x => x.ProductType == ProductTypes.Retail))
                 {
                     list.Add(new SelectListItem()
                     {
@@ -136,5 +138,50 @@ namespace Admin.Web.UI.Controllers
 
             return list;
         }
+
+        protected List<SelectListItem> GetUserList()
+        {
+            var data = new List<SelectListItem>();
+            MembershipTools.NewUserStore().Users
+                .ToList()
+                .ForEach(x =>
+                {
+                    data.Add(new SelectListItem()
+                    {
+                        Text = $"{x.Name} {x.Surname}",
+                        Value = x.Id
+                    });
+                });
+            //veya
+            //var users = MembershipTools.NewUserStore().Users;
+
+            //var data = new List<SelectListItem>();
+            //foreach (var user in users)
+            //{
+            //    data.Add(new SelectListItem()
+            //    {
+            //        Text = $"{user.Name} {user.Surname}",
+            //        Value = user.Id,
+            //    });
+            //}
+            return data;
+        }
+
+        protected List<SelectListItem> GetRoleList()
+        {
+            var data = new List<SelectListItem>();
+            MembershipTools.NewRoleStore().Roles
+                .ToList()
+                .ForEach(x =>
+                {
+                    data.Add(new SelectListItem()
+                    {
+                        Text = $"{x.Name}",
+                        Value = x.Id
+                    });
+                });
+            return data;
+        }
+       
     }
 }
