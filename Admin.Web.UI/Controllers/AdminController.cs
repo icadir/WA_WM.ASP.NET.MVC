@@ -237,9 +237,35 @@ namespace Admin.Web.UI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditUserRoles()
+        public ActionResult EditUserRoles(UpdateUserRoleViewModel model)
         {
-            return RedirectToAction("Index");
+            //var userId = Request.Form[1].ToString();
+            //var rolIdler = Request.Form[2].ToString().Split(',');
+            //üstekiler 1.yöntem
+            var userId = model.Id;
+            var rolIdler = model.Roles;
+            var roleManager = NewRoleManager();
+            var seciliRoller = new string[rolIdler.Count];
+            for (var i = 0; i < rolIdler.Count; i++)
+            {
+                var rid = rolIdler[i];
+                seciliRoller[i] = roleManager.FindById(rid).Name;
+            }
+
+            var userManager = NewUserManager();
+            var user = userManager.FindById(userId);
+
+            foreach (var identityUserRole in user.Roles.ToList())
+            {
+                userManager.RemoveFromRole(userId, roleManager.FindById(identityUserRole.RoleId).Name);
+            }
+
+            for (int i = 0; i < seciliRoller.Length; i++)
+            {
+                userManager.AddToRole(userId, seciliRoller[i]);
+            }
+
+            return RedirectToAction("EditUser", new { id = userId });
         }
     }
 }

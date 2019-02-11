@@ -11,5 +11,6 @@ namespace Admin.Models
         Admin,
         User,
         Sales,
+        Reporting,
     }
 }
