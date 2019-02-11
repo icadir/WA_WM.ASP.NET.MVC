@@ -11,6 +11,7 @@ using Admin.BLL.Services;
 using Admin.Models.Entities;
 using Admin.Models.Models;
 using Admin.Models.ViewModels;
+using AutoMapper;
 
 namespace Admin.Web.UI.Controllers
 {
@@ -36,6 +37,13 @@ namespace Admin.Web.UI.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Add(ProductViewModel model)
         {
+            //Mapper kullanımı
+            //asagıda veri tabanına bi sorgu atılıyor veir tabanından  product list dönüyor ve biz bu dönen X nesnesini prodcutview modelle cast ettiriyoruz. Eşiliyoruz. Bu çagarırken.
+         //-->var data = new ProductRepo().GetAll().Select(x=>Mapper.Map<ProductViewModel>(x)).ToList();
+
+            //Bu Örnekte viewmodel olarak gelen nesneyi istedigimiz entitye cast etme.Bu sayfaya gelen modeli örnek verebilriz.
+            //new ProductRepo().Insert(Mapper.Map<ProductViewModel, Product>(model));
+
             if (!ModelState.IsValid)
             {
                 ViewBag.ProductList = GetProductSelectList();
