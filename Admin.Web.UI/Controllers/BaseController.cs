@@ -6,11 +6,12 @@ using System.Linq;
 using System.Web.Mvc;
 using Admin.BLL.Identity;
 using Admin.Models.Enums;
+using Admin.Web.UI.App_Code;
 
 namespace Admin.Web.UI.Controllers
 {
     [Authorize]
- 
+    [ExceptionHandlerFilter]
     public class BaseController : Controller
     {
         protected List<SelectListItem> GetCategorySelectList()
