@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Routing;
-using Admin.BLL.Identity;
-using Admin.BLL.Services;
+﻿using Admin.BLL.Identity;
 using Admin.Models;
 using Admin.Models.IdentityModels;
+using Admin.Web.UI.App_Start;
 using Microsoft.AspNet.Identity;
+using System;
+using System.Web.Mvc;
+using System.Web.Optimization;
+using System.Web.Routing;
+using Admin.Web.UI.App_Code;
 
 namespace Admin.Web.UI
 {
@@ -18,6 +17,8 @@ namespace Admin.Web.UI
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
+            FiltersConfig.RegisterGlobalFilters(GlobalFilters.Filters);
 
             var roller = Enum.GetNames(typeof(IdentityRoles));
             var roleManager = MembershipTools.NewRoleManager();
