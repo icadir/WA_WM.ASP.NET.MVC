@@ -13,7 +13,7 @@ using Admin.Models.ViewModels;
 
 namespace Admin.Web.UI.Controllers
 {
-
+    [RoutePrefix("Kategori")]
     public class CategoryController : BaseController
     {
         // GET: Category
@@ -107,7 +107,8 @@ namespace Admin.Web.UI.Controllers
         }
 
         [HttpGet]
-        public ActionResult Update(int id = 0)
+        [Route("~/Güncelle/{kategoriadi}/{id?}")]
+        public ActionResult Update(string kategoriadi,int id = 0)
         {
             ViewBag.CategoryList = GetCategorySelectList();
             var data = new CategoryRepo().GetById(id);

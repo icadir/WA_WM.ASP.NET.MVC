@@ -15,6 +15,7 @@ using AutoMapper;
 
 namespace Admin.Web.UI.Controllers
 {
+    [RoutePrefix("Ürünler")]
     public class ProductController : BaseController
     {
         // GET: Product
@@ -126,6 +127,13 @@ namespace Admin.Web.UI.Controllers
         }
 
         [HttpGet]
+        [Route("~/ÜrünDetayArama/kategoriAdı/{ürünAdı}/{id?}")]
+        //buraya gelen kategoriAdı ve ürün adını html sayfamızda attrubute ile gönderiyoruz. linkde göstermesi için. gönderiyoruz ve o kendisi ayarlıyor. bizde kuzey BLL projesine eklicez ama çalışmaz. görüntü olsun diye.
+        //category için null kontrolu yaptık.
+        //hoca kendi projesinde ders 4 de ürün ve kategoride yaptı oralardan bakabilirsin. 
+        //hoca kategoriy de kuzey bbl de kategoride string kategori adı yazmıstı ona gerek yok ama yazsakda olur. önemli olan html tarafından buraya kategori adı vs ne yazdıysak göndermemiz gerekir.
+        //new {id=item.ProductID,kategoriadi=StringHelpers.UrlFormatConverter(item.CategoryName),urunadi=StringHelpers.UrlFormatConverter(item.ProductName)} gibi arka taraftan gönderiyoruz. Burada hoca produckt üstüne yazdıgımız  şöyledir. routu da anladık.
+        //-->  [Route("~/en-ucuz-urun/{kategoriadi}-{urunadi}/{id?}")
         public JsonResult CheckBarcode(string barcode)
         {
             try

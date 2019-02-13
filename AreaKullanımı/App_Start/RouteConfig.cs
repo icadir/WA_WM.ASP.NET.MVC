@@ -5,24 +5,21 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Admin.Web.UI
+namespace AreaKullanımı
 {
     public class RouteConfig
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-            routes.MapMvcAttributeRoutes();
-            routes.LowercaseUrls = true;
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            );
-
-            routes.MapRoute(
-                name: "Satis",
-                url: "{controller}/Satis-{action}/{id}"
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                //hem burada hemde adminareadakiregistration içine namespace alanı ekliyoruzki kendisi aynı isimde karıştırmasın.. 
+                namespaces: new[] { "AreaKullanımı.Controllers" }
+                
             );
         }
     }
