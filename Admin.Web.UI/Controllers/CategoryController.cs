@@ -68,6 +68,7 @@ namespace Admin.Web.UI.Controllers
                     img.Resize(250, 250, false);
                     img.AddTextWatermark("Wissen");
                     img.Save(dosyayolu);
+                    var oldPath = user.AvatarPath;
                     model.CategoryPath = "/Product/" + fileName + extName;
                 }
 

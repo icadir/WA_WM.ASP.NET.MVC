@@ -1,0 +1,38 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+@*angular default etikenleti ng ile başlar*@
+<html ng-app="myApp">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Scripts/angular.js"></script>
+    <script>
+        //(Depandence injection)/*ekstra yeni paketler eklemek istersen []arasına  yazarız. referanslardaki gibi*/
+        var app = angular.module("myApp", [])
+        //dışarıdan erişim scope saglıyor. içeri yazdıgımız.
+        app.controller("homeCtrl",
+            function ($scope) {
+                $scope.toplam = 0;
+                $scope.kisiler = [];
+                $scope.yeniKisi = {};
+                //dışardan erişim için $scope yazıyoruz.
+                $scope.topla = function () {
+                    $scope.toplam = $scope.sayi1 + $scope.sayi2;
+                    console.log($scope.toplam);
+                }
+            });
+    </script>
+</head>
+<body>
+    <div class="main" ng-controller="homeCtrl">
+        <input type="number" placeholder="Sayı 1" ng-model="sayi1" ng-change="topla()" /><br />
+        <input type="number" placeholder="Sayı 2" ng-model="sayi2" ng-change="topla()" /><br />
+        <span><strong>{{toplam}}</strong></span>
+    </div>
+</body>
+</html>
