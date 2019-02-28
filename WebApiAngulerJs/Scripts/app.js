@@ -19,6 +19,17 @@ app.controller("ProductCtrl", function ($scope) {
         $scope.yeni.fiyat = "";
         localStorage.setItem("urunler", JSON.stringify($scope.urunler));
     };
+    
+    $scope.sil = function (id) {
+        for (var i = 0; i < $scope.urunler.length; i++) {
+            var data = $scope.urunler[i];
+            if (id == data.id) {
+                $scope.urunler.splice(i, 1);
+                break;
+            }
+        }
+        localStorage.setItem("urunler", JSON.stringify($scope.urunler));
+    };
 
     function guid() {
         function S4() {
