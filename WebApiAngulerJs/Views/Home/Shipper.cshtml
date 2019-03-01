@@ -1,0 +1,62 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+<html ng-app="myApp">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Category</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/app.js"></script>
+</head>
+<body>
+    <div class="container" ng-controller="ShipperCtrl">
+        <div class="row justify-content-center" ng-show="istekVarMi">
+            <div class="col">
+                <h4>Veri yükleniyor...</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <form name="ekleform">
+                    <input type="hidden" ng-model="yeni.ShipperID" />
+                    <input type="text" class="form-control" ng-model="yeni.CompanyName" placeholder="Şirket Adı" /><br />
+                    <input type="number" class="form-control" ng-model="yeni.Phone" placeholder="Telefon no" /><br />
+                    <input type="button" value="Ekle" class="btn btn-success" ng-click="ekle()" ng-show="!guncelleMi" />
+
+                    <input type="button" value="Güncelle" class="btn btn-info" ng-click="guncelle()" ng-show="guncelleMi" />
+                </form>
+            </div>
+        </div>
+        <input type="search" placeholder="Ara.." class="form-control" ng-model="txtara" />
+        <div class="row">
+            <div class="col">
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Kargo Şirketi Adı</th>
+                            <th>Phone</th>
+                            <th>İşlem</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="(key,item) in shipperList | filter:txtara track by item.ShipperID">
+                            <th scope="row">{{key+1}}</th>
+                            <td>{{item.CompanyName}}</td>
+                            <td>{{item.Phone}}</td>
+                            <td>
+                                <input type="button" value="Sil" class="btn btn-danger" ng-click="sil(item.ShipperID)" />
+                                <input type="button" value="Güncelle" class="btn btn-warning" ng-click="getir(item)" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

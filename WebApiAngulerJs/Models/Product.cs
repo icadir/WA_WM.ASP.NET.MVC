@@ -27,5 +27,6 @@ namespace WebApiAngulerJs.Models
         public System.DateTime AddedDate { get; set; }
     
         public virtual Category Category { get; set; }
+        public virtual Supplier Supplier { get; set; }
     }
 }
