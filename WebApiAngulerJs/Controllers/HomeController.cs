@@ -19,6 +19,10 @@ namespace WebApiAngulerJs.Controllers
             return View();
         }
 
+        public ActionResult Category()
+        {
+            return View();
+        }
         public ActionResult Shipper()
         {
             return View();
