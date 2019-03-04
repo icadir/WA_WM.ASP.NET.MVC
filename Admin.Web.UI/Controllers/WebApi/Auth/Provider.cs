@@ -16,9 +16,10 @@ namespace Admin.Web.UI.Controllers.WebApi.Auth
         {
             context.Validated();
         }
+
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
+            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] {"*"});
             var userManager = MembershipTools.NewUserManager();
             var user = userManager.Find(context.UserName, context.Password);
             if (user == null)
@@ -27,8 +28,10 @@ namespace Admin.Web.UI.Controllers.WebApi.Auth
             }
             else
             {
-                ClaimsIdentity identity = await userManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ExternalBearer);
+                ClaimsIdentity identity =
+                    await userManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ExternalBearer);
                 context.Validated(identity);
             }
         }
+    }
 }
