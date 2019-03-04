@@ -303,7 +303,7 @@
     <Content Include="assets\js\plugins\slick\fonts\slick.eot" />
     <Content Include="assets\js\plugins\slick\fonts\slick.ttf" />
     <Content Include="assets\js\plugins\slick\fonts\slick.woff" />
-    <Content Include="App_Start\LoginTest.html" />
+    <Content Include="LoginTest.html" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_LayoutMain.cshtml" />
     <Content Include="Views\Shared\Partial\_DrawerPartial.cshtml" />
