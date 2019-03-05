@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -9,7 +10,7 @@ namespace DevxOdata.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-          : base("DefaultConnection", throwIfV1Schema: false)
+            : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
 
@@ -17,5 +18,7 @@ namespace DevxOdata.Models
         {
             return new ApplicationDbContext();
         }
+
+        public virtual DbSet<Customer> Customers { get; set; }
     }
 }
