@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using DevxOdata.Models;
 using System.Web.Http;
+using System.Web.Http.OData.Builder;
+using System.Web.Http.OData.Extensions;
 
 namespace DevxOdata
 {
@@ -13,6 +13,11 @@ namespace DevxOdata
 
             // Web API routes
             config.MapHttpAttributeRoutes();
+
+            ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
+            builder.EntitySet<Customer>("CustomerOdata");
+            config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
+
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
