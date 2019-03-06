@@ -10,6 +10,7 @@ namespace Rabbit.Web.Mvc.Models
 {
     public class Publisher
     {
+
         private readonly RabbitMqService _rabbitMqService;
         private const string DefaultQueue = "wissen1";
         public Publisher(string message, string queueName = null)
