@@ -12,12 +12,11 @@ namespace Rabit.Models
     public class MailLog
     {
         [Key]
-        public Guid Id { get; set; } = new Guid();
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         public string Message { get; set; }
         public string Subject { get; set; }
         public Guid CustomerId { get; set; }
-        
 
         [ForeignKey("CustomerId")]
         public virtual Customer Customer { get; set; }
